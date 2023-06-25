@@ -1,6 +1,9 @@
 
 it('should calculate the monthly rate correctly', function () {
-  expect()
+  expect(calculateMonthlyPayment({
+    amount: 10000,
+    years: 5,
+    rate: 0.01})).toBeCloseTo(222.44, 2)
 });
 
 

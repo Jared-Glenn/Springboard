@@ -30,7 +30,7 @@ function setupIntialValues() {
 // Update the monthly payment
 function update() {
   const values = getCurrentUIValues();
-  const monthlyPayment = (values.amount * values.rate)/(1 - (Math.pow((1 + values.rate),(-1 * (values.years * 12)))));
+  monthlyPayment = calculateMonthlyPayment(values)
   const monPayDiv = document.getElementById("monthly-payment");
   const newDiv = document.createElement("p");
   newDiv.innerText = monthlyPayment.toString();
@@ -41,6 +41,7 @@ function update() {
 // calculate the monthly payment.  The output should be a string
 // that always has 2 decimal places.
 function calculateMonthlyPayment(values) {
+  return (values.amount * values.rate)/(1 - (Math.pow((1 + values.rate),(-1 * (values.years * 12)))));
 }
 
 // Given a string representing the monthly payment value,
