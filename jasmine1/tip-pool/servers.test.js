@@ -2,6 +2,8 @@ describe("Servers test (with setup and tear-down)", function() {
   beforeEach(function () {
     // initialization logic
     serverNameInput.value = 'Alice';
+    billAmtInput.value = '27.32';
+    tipAmtInput.value = '5.50';
   });
 
   it('should add a new server to allServers on submitServerInfo()', function () {
@@ -23,11 +25,25 @@ describe("Servers test (with setup and tear-down)", function() {
     for (let num in allServers){
       numTotal++;
     }
-    console.log(numTotal);
     expect(numTotal).toEqual(serverTbody.rows.length);
   })
 
+  it('should record the bill amount in the payment table', function() {
+    submitPaymentInfo()
+    let billTable = document.getElementById('payment1');
+    let billAmount = billTable.firstChild.innerText;
+    console.log(billAmount)
+    expect(billAmount).toEqual('$27.32');
+  })
+
+
   afterEach(function() {
+    billAmtInput.value = '';
+    tipAmtInput.value = '';
+    
+    allPayments = {};
+    paymentId = 0;
+    
     allServers = {};
     serverId = 0;
     updateServerTable();
