@@ -1,4 +1,15 @@
 const arr = [{name: 'Elie'}, {name: 'Tim'}, {name: 'Matt'}, {name: 'Colt'}]
+const numArr = [1,2,3,4,5,6,7,8];
+
+function isEven(val){
+    return val % 2 === 0;
+  }
+  
+  function isLongerThanThreeCharacters(val){
+    return val.length > 3;
+  }
+  
+const names = ['Elie', 'Colt', 'Tim', 'Matt'];
 
 function extractValue(arr, key){;
     return arr.reduce(function(valueArray, currentPerson){
@@ -23,4 +34,24 @@ function vowelCount(string){
         }
         return accumulator;
     }, {})
+}
+
+function addKeyAndValue(arr, key, value){
+    return arr.reduce(function(accumulator, currentValue){
+        currentValue[key] = value;
+        accumulator.push(currentValue);
+        return accumulator;
+    }, [])
+}
+
+function partition(arr, callback){
+    return arr.reduce(function(accumulator, currentValue){
+        if (callback(currentValue)){
+            accumulator[0].push(currentValue);
+        }
+        else {
+            accumulator[1].push(currentValue);
+        }
+        return accumulator;
+    }, [[], []])
 }
