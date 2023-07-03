@@ -7,40 +7,49 @@
 }
 
 body {
-  /* TODO */
+  background-image: linear-gradient(to right, gold, rgb(255, 85, 0));
+  height: 100vw;
 }
 
 input {
- /* TODO */
+ background-color: transparent;
+ border-color: white;
+ border-radius:10px;
+ font-size: 1.3rem;
+ width: 27vw;
+ padding: 1rem;
+}
+
+input:hover {
+  opacity: 0.7;
 }
 
 .search-container {
- /* TODO */
-}
-.search-container input,
-.search-container .suggestions {
-  /* TODO */
-}
-.search-container input {
- /* TODO */
-}
-.search-container .suggestions {
-   /* TODO */
+ position: absolute;
+ top: 250px;
+ right: 50%;
+ transform: translate(50%, 50%);
+ background-color: transparent;
+ width: 35vw;
+ min-height: 300px;
 }
 
 ul {
-  /* TODO */
-}
-ul.has-suggestions {
-  /* TODO */
-}
-ul li {
-  /* TODO */
-}
-ul li:hover {
-  /* TODO */
+  margin: 0;
+  padding: 0;
 }
 
-input {
-   /* TODO */
+.suggestions {
+  background-color: rgb(255, 179, 0);
+  margin: 0;
+  padding: 0;
+  width: 30vw;
+  height: auto;
+}
+
+
+.suggestion {
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  margin: 0;
 }
