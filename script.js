@@ -10,8 +10,8 @@ const find = e => {
 }
 
 function search(str) {
-	const results = fruit.filter(value => value.includes(str));
-	console.log(results)
+	const results = fruit.filter(value => value.toLowerCase().includes(str));
+	console.log(value.toLowerCase())
 	
 	return results;
 }
