@@ -24,6 +24,7 @@ input:hover {
  background-color: transparent;
  width: 35vw;
  min-height: 300px;
+ max-height: 300px;
 }
 
 ul {
@@ -37,6 +38,8 @@ ul {
   padding: 0;
   width: 30vw;
   height: auto;
+  max-height: 200px;
+  overflow: auto;
 }
 
 
