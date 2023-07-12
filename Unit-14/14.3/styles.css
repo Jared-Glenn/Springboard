@@ -1,0 +1,70 @@
+body {
+    background-color: black;
+}
+
+h1 {
+    color: white;
+    font-family: 'Tilt Prism', cursive;
+    font-size: 4rem;
+    margin: 4rem;
+    text-align: center;
+}
+
+#form-div {
+    text-align: center;
+}
+
+#search-term {
+    height:20px;
+    width: 23vw;
+    font-size: large;
+    padding: 10px;
+    background-color: #575757;
+    color: white;
+    border-color: #575757;
+}
+
+#search-term:hover {
+    color: #e8e8e8;
+    background-color: #4e4c4c;
+}
+
+#search {
+    background-color: #4ec22b;
+    border-color: #4ec22b;
+    color: white;
+    height:45px;
+    width: 17vw;
+    font-size: large;
+    padding: 10px;
+}
+
+#search:hover {
+    background-color: #36aa13;
+}
+
+#remove {
+    background-color: #c72828;
+    border-color: #c72828;
+    color: white;
+    height:45px;
+    width: 17vw;
+    font-size: large;
+    padding: 10px;
+}
+
+#remove:hover {
+    background-color: #af1717;
+}
+
+#gif-area {
+    margin: 3vw;
+    padding: 2rem;
+}
+
+.gif {
+    max-width: 29vw;
+    max-height: 15vw;
+    border: 2px solid white;
+    margin: 3rem 1rem 1rem;
+}

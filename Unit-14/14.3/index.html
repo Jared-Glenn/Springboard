@@ -4,12 +4,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Giphy Party!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+  <h1>GIPHY PARTY!</h1>
+  <div id="form-div">
+    <form action="">
+      <input type="text" id="search-term" placeholder="Enter a search term">
+      <button id="search" type="submit"><strong>Search Giphy!</strong></button>
+      <button id="remove" type="button"><strong>Remove Images</strong></button>
+    </form>
+  </div>
+  <div id="gifs-div">
+    
+  </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="app.js"></script>
 </body>
 
