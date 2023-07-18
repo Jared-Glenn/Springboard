@@ -73,8 +73,10 @@ class StoryList {
    * Returns the new Story instance
    */
 
+
+  // Post relevant information for the story, then use the response to create a Story object.
   async addStory(currentUser, storyObj) {
-    await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories', {
+    const newStory = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories', {
       "token": currentUser.loginToken,
       "story": {
         "author": storyObj.author,
@@ -82,6 +84,8 @@ class StoryList {
         "url": storyObj.url
       }
     })
+    const story = new Story(newStory.data.story.storyId, newStory.data.story.title, newStory.data.story.author, newStory.data.story.url, newStory.data.story.username, newStory.data.story.createdAt);
+    return story;
   }
 }
 
