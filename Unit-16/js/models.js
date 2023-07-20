@@ -84,13 +84,11 @@ class StoryList {
         "url": storyObj.url
       }
     })
-    const story = await new Story(newStory.data.story.storyId, newStory.data.story.title, newStory.data.story.author, newStory.data.story.url, newStory.data.story.username, newStory.data.story.createdAt);
+    const test = newStory.data.story.storyId;
+    const story = new Story({"storyId": newStory.data.story.storyId, "title": newStory.data.story.title, "author": newStory.data.story.author, "url": newStory.data.story.url, "username": newStory.data.story.username, "createdAt": newStory.data.story.createdAt});
     
-    // RIGHT HERE START RIGHT HERE START RIGHT HERE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-    console.log(storyList.stories)
-    storyList.stories.push(story)
-    console.log(storyList.stories)
+    storyList.stories.unshift(story);
+    return story;
   }
 }
 

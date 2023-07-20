@@ -114,3 +114,11 @@ function updateUIOnUserLogin() {
 
   updateNavOnLogin();
 }
+
+// Add a favorite to the list of favorites for this user.
+async function addFavorite(storyId) {
+  console.log(currentUser.username);
+  console.log(storyId);
+  const res = await axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`)
+  return res;
+}
