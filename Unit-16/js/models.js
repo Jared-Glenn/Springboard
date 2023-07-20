@@ -84,8 +84,10 @@ class StoryList {
         "url": storyObj.url
       }
     })
-    const story = new Story(newStory.data.story.storyId, newStory.data.story.title, newStory.data.story.author, newStory.data.story.url, newStory.data.story.username, newStory.data.story.createdAt);
-    return story;
+    const story = await new Story(newStory.data.story.storyId, newStory.data.story.title, newStory.data.story.author, newStory.data.story.url, newStory.data.story.username, newStory.data.story.createdAt);
+    console.log(storyList.stories)
+    storyList.stories.push(story)
+    console.log(storyList.stories)
   }
 }
 

@@ -67,11 +67,11 @@ async function submitStory(evt) {
 
   // User.login retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
-  const newStory = await storyList.addStory(currentUser,
+  await storyList.addStory(currentUser,
     {title: subTitle, author: subAuthor, url: subUrl});
 
   $submitForm.trigger("reset");
-  navAllStories()
+  navAllStories();
 }
 
 $submitForm.on("submit", submitStory);
