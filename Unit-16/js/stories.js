@@ -50,3 +50,28 @@ function putStoriesOnPage() {
 
   $allStoriesList.show();
 }
+
+
+async function submitStory(evt) {
+  console.debug("submitStory", evt);
+  evt.preventDefault();
+
+  // grab the username and password
+  const subTitle = $("#submit-title").val();
+  const subAuthor = $("#submit-author").val();
+  const subUrl = $("#submit-url").val();
+
+  console.log(subTitle);
+  console.log(subAuthor);
+  console.log(subUrl);
+
+  // User.login retrieves user info from API and returns User instance
+  // which we'll make the globally-available, logged-in user.
+  const newStory = await storyList.addStory(currentUser,
+    {title: subTitle, author: subAuthor, url: subUrl});
+
+  $submitForm.trigger("reset");
+  navAllStories()
+}
+
+$submitForm.on("submit", submitStory);
