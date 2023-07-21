@@ -33,9 +33,12 @@ function generateStoryMarkup(story) {
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
+        <br>
         <small class="story-author">by ${story.author}</small>
+        <br>
         <small class="story-user">posted by ${story.username}</small>
       </li>
+      <hr>
     `);
     }
   }
@@ -46,9 +49,12 @@ function generateStoryMarkup(story) {
         ${story.title}
       </a>
       <small class="story-hostname">(${hostName})</small>
+      <br>
       <small class="story-author">by ${story.author}</small>
+      <br>
       <small class="story-user">posted by ${story.username}</small>
     </li>
+    <hr>
   `);
 }
 
@@ -61,27 +67,35 @@ function generateMyStoryMarkup(story) {
     if (favorite.storyId === story.storyId){
       return $(`
       <li id="${story.storyId}">
-      <span> <i class="fa fa-trash-o"></i> <i class="fa-solid fa-star"></i> </span>
+      <span> <i class="fa-solid fa-star"></i> </span>
       <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
+        <span><i class="fa fa-trash-o"></i> </span>
+        <br>
         <small class="story-author">by ${story.author}</small>
+        <br>
         <small class="story-user">posted by ${story.username}</small>
       </li>
+      <hr>
     `);
     }
   }
   return $(`
     <li id="${story.storyId}">
-    <span> <i class="fa fa-trash-o"></i> <i class="fa-regular fa-star"></i> </span>
+    <span><i class="fa-regular fa-star"></i> </span>
     <a href="${story.url}" target="a_blank" class="story-link">
         ${story.title}
       </a>
       <small class="story-hostname">(${hostName})</small>
+      <span><i class="fa fa-trash-o"></i> </span>
+      <br>
       <small class="story-author">by ${story.author}</small>
+      <br>
       <small class="story-user">posted by ${story.username}</small>
     </li>
+    <hr>
   `);
 }
 
