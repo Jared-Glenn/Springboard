@@ -20,12 +20,16 @@ async function getAndShowStoriesOnStart() {
  */
 
 function generateStoryMarkup(story) {
-  // console.debug("generateStoryMarkup", story);
+  console.debug("generateStoryMarkup", story);
 
-  const hostName = story.getHostName();
-  return $(`
+  const hostName = story.getHostName(story.url);
+
+  for (let favorite of currentUser.favorites){
+    if (favorite.storyId === story.storyId){
+      return $(`
       <li id="${story.storyId}">
-        <a href="${story.url}" target="a_blank" class="story-link">
+      <span> <i class="fa-solid fa-star"></i> </span>
+      <a href="${story.url}" target="a_blank" class="story-link">
           ${story.title}
         </a>
         <small class="story-hostname">(${hostName})</small>
@@ -33,6 +37,19 @@ function generateStoryMarkup(story) {
         <small class="story-user">posted by ${story.username}</small>
       </li>
     `);
+    }
+  }
+  return $(`
+    <li id="${story.storyId}">
+    <span> <i class="fa-regular fa-star"></i> </span>
+    <a href="${story.url}" target="a_blank" class="story-link">
+        ${story.title}
+      </a>
+      <small class="story-hostname">(${hostName})</small>
+      <small class="story-author">by ${story.author}</small>
+      <small class="story-user">posted by ${story.username}</small>
+    </li>
+  `);
 }
 
 /** Gets list of stories from server, generates their HTML, and puts on page. */
@@ -75,3 +92,21 @@ async function submitStory(evt) {
 }
 
 $submitForm.on("submit", submitStory);
+
+
+function putFavoritesOnPage() {
+  console.debug("putFavoritesOnPage");
+
+  $allStoriesList.empty();
+
+  // Loop through all of our stories, choose only those that are favorited, and generate HTML for them
+  for (let story of storyList.stories) {
+    for (let favorite of currentUser.favorites) {
+      if (favorite.storyId === story.storyId) {
+        const $story = generateStoryMarkup(story);
+        $allStoriesList.append($story);
+      }
+    }
+  }
+  $allStoriesList.show();
+}

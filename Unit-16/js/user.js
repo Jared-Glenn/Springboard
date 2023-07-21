@@ -117,8 +117,46 @@ function updateUIOnUserLogin() {
 
 // Add a favorite to the list of favorites for this user.
 async function addFavorite(storyId) {
-  console.log(currentUser.username);
-  console.log(storyId);
-  const res = await axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${currentUser.username}/favorites/${storyId}`)
+  const res = await axios({
+    url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
+    method: "POST",
+    data: { token: currentUser.loginToken },
+  });
+  const thisStory = storyList.stories.find(function(obj){
+    return obj.storyId === storyId;
+  })
+  currentUser.favorites.push(thisStory)
+  
   return res;
 }
+
+async function removeFavorite(storyId) {
+  const res = await axios({
+    url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
+    method: "DELETE",
+    data: { token: currentUser.loginToken },
+  });
+  const thisStoryIndex = storyList.stories.findIndex(function(obj){
+    return obj.storyId === storyId;
+  })
+  currentUser.favorites.splice(thisStoryIndex, thisStoryIndex)
+  return res;
+}
+
+// async function toggleFavoriteClick() {
+
+// }
+
+$allStoriesList.on("click", function(evt) {
+  console.log($(evt.target).parent().parent()[0].id)
+  if ($(evt.target).hasClass('fa-regular')) {
+    addFavorite($(evt.target).parent().parent()[0].id);
+    $(evt.target).removeClass('fa-regular');
+    $(evt.target).addClass('fa-solid');
+  }
+  else if ($(evt.target).hasClass('fa-solid')) {
+    removeFavorite($(evt.target).parent().parent()[0].id);
+    $(evt.target).removeClass('fa-solid');
+    $(evt.target).addClass('fa-regular');
+  }
+})
