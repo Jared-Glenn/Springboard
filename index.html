@@ -1,24 +1,157 @@
 <!DOCTYPE html>
-<html lang="en" >
+
+<!-- Hack or Snooze
+
+     This is the only HTML page; the applications manipulates this DOM
+     during use.
+
+     Primary authors:
+     - Michael Hueter: initial creation, 2018
+     - Elie Schoppik: refactoring using OO, 2019
+     - Joel Burton: refactored and componentized, 2020
+     - You!
+  -->
+
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>Fruit Autocomplete</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<link rel="stylesheet" href="./style.css">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Hack or Snooze</title>
+  <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/user.css">
+  <link rel="stylesheet" href="css/stories.css">
+  <link rel="stylesheet" href="css/nav.css">
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="search-container">
-	<form action="submit" id="fruit-form">
-    <input type="text" name="fruit" id="fruit" placeholder="Search fruit 🍎" autocomplete="off">
-    </form>
-	<div class="suggestions">
-		<ul></ul>
-	</div>
-</div>
-<!-- partial -->
-  <script  src="./script.js"></script>
+
+<!-- top navigation bar -->
+<nav>
+  <div class="navbar-brand">
+    <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
+    
+  </div>
+  <div class="nav-left hidden">
+    <span> | </span>
+    <a class='nav-link' href='#' id="nav-sub">Submit</a>
+    <span> | </span>
+    <a class='nav-link' href='#' id="nav-fav">Favorites</a>
+    <span> | </span>
+    <a class='nav-link' href='#' id="nav-my">My Stories</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link" href="#" id="nav-login">Login/Signup</a>
+    <a class="nav-link" href="#" id="nav-user-profile"></a>
+    <a class="hidden" id="nav-logout" href="#"><small>(Logout)</small></a>
+  </div>
+</nav>
+
+<!-- Submit New Story form -->
+<section class="submit-form-container container">
+<form
+      action="#"
+      id="submit-form"
+      class="submit-form hidden"
+      method="post">
+    <h4>Submit Story</h4>
+    <div class="submit-form"">
+      <div class="submit-form">
+        <label for="submit-title">Title</label>
+        <input type="text" id="submit-title" required>
+      </div>
+      <div class="submit-form">
+        <label for="submit-author">Author</label>
+        <input type="text" id="submit-author" required>
+      </div>
+      <div class="submit-form">
+        <label for="submit-url">URL</label>
+        <input type="text" id="submit-url" required>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
+    <hr>
+</form>
+
+</section>
+
+
+<!-- area for stories (all stories, user stories, favorites) -->
+<section class="stories-container container">
+
+  <!-- loading message (removed by JS after stories loaded) -->
+  <div id="stories-loading-msg">Loading&hellip;</div>
+
+  <!-- List of all stories -->
+  <ol id="all-stories-list" class="stories-list"></ol>
+
+</section>
+
+<!-- Login and signup forms -->
+<section class="account-forms-container container">
+
+  <!-- Login form -->
+  <form
+      action="#"
+      id="login-form"
+      class="account-form hidden"
+      method="post">
+    <h4>Login</h4>
+    <div class="login-input">
+      <label for="login-username">Username</label>
+      <input id="login-username" autocomplete="current-username">
+    </div>
+    <div class="login-input">
+      <label for="login-password">Password</label>
+      <input id="login-password" type="password" autocomplete="current-password">
+    </div>
+    <button type="submit">Login</button>
+    <hr>
+  </form>
+
+  <!-- Signup form -->
+  <form
+      action="#"
+      id="signup-form"
+      class="account-form hidden"
+      method="post">
+    <h4>Create Account</h4>
+    <div class="login-input">
+      <label for="signup-name">Name</label>
+      <input id="signup-name" autocapitalize="words">
+    </div>
+    <div class="login-input">
+      <label for="signup-username">Username</label>
+      <input id="signup-username" autocomplete="new-username">
+    </div>
+    <div class="login-input">
+      <label for="signup-password">Password</label>
+      <input id="signup-password" autocomplete="new-password" type="password">
+    </div>
+    <button type="submit">Create Account</button>
+  </form>
+</section>
+
+
+
+<!-- Library JS & our JS -->
+<script src="https://kit.fontawesome.com/bf5d049ab1.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+<script src="js/models.js"></script>
+<script src="js/main.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/user.js"></script>
+<script src="js/stories.js"></script>
 
 </body>
 </html>

@@ -1,0 +1,66 @@
+/* Lists of stories */
+
+.stories-list {
+  margin: 20px 5px;
+}
+
+.stories-list > li {
+  color: gray;
+  font-size: 0.8rem;
+  margin: 10px 0;
+}
+
+#stories-loading-msg {
+  font-weight: bold;
+  font-size: 150%;
+  margin: 20px 30px;
+}
+
+/* Original author https://css-tricks.com/examples/hrs/. Extracted on 7/21/2023 */
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+/* Individual stories */
+
+.story-link {
+  color: black;
+  font-size: 0.85rem;
+  font-weight: normal;
+  margin: 18px 0;
+  font-weight: 700;
+}
+
+.story-link:hover {
+  text-decoration: none;
+}
+
+.story-author {
+  margin-left: 2em;
+  color: green;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-left: 33px;
+}
+
+.story-user {
+  margin-left: 2em;
+  color: #ff6600;
+  font-weight: 700;
+  font-size: 0.8rem;
+  margin-left: 33px;
+}
+
+i {
+  padding-left: 7px;
+  padding-right: 7px;
+  cursor: pointer;
+}
+
+i:hover {
+  color: black;
+}
