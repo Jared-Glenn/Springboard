@@ -52,8 +52,40 @@ function generateStoryMarkup(story) {
   `);
 }
 
-/** Gets list of stories from server, generates their HTML, and puts on page. */
+function generateMyStoryMarkup(story) {
+  console.debug("generateMyStoryMarkup", story);
 
+  const hostName = story.getHostName(story.url);
+
+  for (let favorite of currentUser.favorites){
+    if (favorite.storyId === story.storyId){
+      return $(`
+      <li id="${story.storyId}">
+      <span> <i class="fa fa-trash-o"></i> <i class="fa-solid fa-star"></i> </span>
+      <a href="${story.url}" target="a_blank" class="story-link">
+          ${story.title}
+        </a>
+        <small class="story-hostname">(${hostName})</small>
+        <small class="story-author">by ${story.author}</small>
+        <small class="story-user">posted by ${story.username}</small>
+      </li>
+    `);
+    }
+  }
+  return $(`
+    <li id="${story.storyId}">
+    <span> <i class="fa fa-trash-o"></i> <i class="fa-regular fa-star"></i> </span>
+    <a href="${story.url}" target="a_blank" class="story-link">
+        ${story.title}
+      </a>
+      <small class="story-hostname">(${hostName})</small>
+      <small class="story-author">by ${story.author}</small>
+      <small class="story-user">posted by ${story.username}</small>
+    </li>
+  `);
+}
+
+/** Gets list of stories from server, generates their HTML, and puts on page. */
 function putStoriesOnPage() {
   console.debug("putStoriesOnPage");
 
@@ -77,10 +109,6 @@ async function submitStory(evt) {
   const subTitle = $("#submit-title").val();
   const subAuthor = $("#submit-author").val();
   const subUrl = $("#submit-url").val();
-
-  console.log(subTitle);
-  console.log(subAuthor);
-  console.log(subUrl);
 
   // User.login retrieves user info from API and returns User instance
   // which we'll make the globally-available, logged-in user.
@@ -108,5 +136,36 @@ function putFavoritesOnPage() {
       }
     }
   }
+  if ($allStoriesList.children().length === 0){
+    const $noFavs = $(`
+      <p>No favorites added!</p>
+    `);
+    $allStoriesList.append($noFavs);
+  }
   $allStoriesList.show();
 }
+
+$navFav.on("click", putFavoritesOnPage);
+
+function putMyStoriesOnPage() {
+  console.debug("putMyStoriesOnPage");
+
+  $allStoriesList.empty();
+
+  // Loop through all of our stories, choose only those that are favorited, and generate HTML for them
+  for (let story of storyList.stories) {
+    if (story.username === currentUser.username) {
+      const $story = generateMyStoryMarkup(story);
+      $allStoriesList.append($story);
+      }
+    }
+  if ($allStoriesList.children().length === 0){
+    const $noFavs = $(`
+      <p>No stories added by user yet!</p>
+    `);
+    $allStoriesList.append($noFavs);
+  }
+  $allStoriesList.show();
+}
+
+$navMy.on("click", putMyStoriesOnPage);

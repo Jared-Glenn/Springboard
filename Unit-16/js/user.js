@@ -136,19 +136,15 @@ async function removeFavorite(storyId) {
     method: "DELETE",
     data: { token: currentUser.loginToken },
   });
-  const thisStoryIndex = storyList.stories.findIndex(function(obj){
+  const thisStoryIndex = currentUser.favorites.findIndex(function(obj){
     return obj.storyId === storyId;
   })
-  currentUser.favorites.splice(thisStoryIndex, thisStoryIndex)
+  currentUser.favorites.splice(thisStoryIndex, 1)
   return res;
 }
 
-// async function toggleFavoriteClick() {
-
-// }
-
+// Favorites listener. Add/remove favorite to/from user and adjust star accordingly.
 $allStoriesList.on("click", function(evt) {
-  console.log($(evt.target).parent().parent()[0].id)
   if ($(evt.target).hasClass('fa-regular')) {
     addFavorite($(evt.target).parent().parent()[0].id);
     $(evt.target).removeClass('fa-regular');
