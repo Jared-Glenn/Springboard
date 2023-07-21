@@ -105,7 +105,7 @@ async function submitStory(evt) {
   console.debug("submitStory", evt);
   evt.preventDefault();
 
-  // grab the username and password
+  // Get the title, author, and url.
   const subTitle = $("#submit-title").val();
   const subAuthor = $("#submit-author").val();
   const subUrl = $("#submit-url").val();
@@ -169,3 +169,23 @@ function putMyStoriesOnPage() {
 }
 
 $navMy.on("click", putMyStoriesOnPage);
+
+// Delete story from the api.
+async function deleteStory(evt) {
+  console.debug("submitStory", evt);
+
+  // Get the story ID.
+  const storyId = $(evt.target).parent().parent()[0].id;
+
+  const res = await axios({
+    url: `${BASE_URL}/stories/${storyId}`,
+    method: "DELETE",
+    data: { token: currentUser.loginToken },
+  });
+  const thisStoryIndex = storyList.stories.findIndex(function(obj){
+    return obj.storyId === storyId;
+  })
+  storyList.stories.splice(thisStoryIndex, 1)
+
+  putMyStoriesOnPage();
+}

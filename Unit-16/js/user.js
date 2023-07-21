@@ -130,6 +130,7 @@ async function addFavorite(storyId) {
   return res;
 }
 
+// Add a favorite to the list of favorites for this user.
 async function removeFavorite(storyId) {
   const res = await axios({
     url: `${BASE_URL}/users/${currentUser.username}/favorites/${storyId}`,
@@ -143,6 +144,8 @@ async function removeFavorite(storyId) {
   return res;
 }
 
+
+
 // Favorites listener. Add/remove favorite to/from user and adjust star accordingly.
 $allStoriesList.on("click", function(evt) {
   if ($(evt.target).hasClass('fa-regular')) {
@@ -154,5 +157,9 @@ $allStoriesList.on("click", function(evt) {
     removeFavorite($(evt.target).parent().parent()[0].id);
     $(evt.target).removeClass('fa-solid');
     $(evt.target).addClass('fa-regular');
+  }
+  else if ($(evt.target).hasClass('fa-trash-o')) {
+    removeFavorite($(evt.target).parent().parent()[0].id);
+    deleteStory(evt);
   }
 })
