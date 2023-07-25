@@ -29,3 +29,14 @@ def is_odd_string(word):
     """
 
     # Hint: you may find the ord() function useful here
+    word_list = list(word)
+    let_sum = 0
+    
+    for letter in word_list:
+        let_sum += ((ord(letter.lower())) - 96)
+    
+    if let_sum%2 == 0:
+        return False
+    else:
+        return True
+    
