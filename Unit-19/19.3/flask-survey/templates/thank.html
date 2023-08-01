@@ -1,0 +1,13 @@
+{%extends 'base.html'%}
+
+{%block title%}Survey Taker - Thank You{%endblock%}
+
+{%block content%}
+
+{%for msg in get_flashed_messages() %}
+<p>{{msg}}</p>
+{%endfor%}
+
+<h2>Thank you!</h2>
+
+{%endblock%}
