@@ -29,7 +29,7 @@ def question(question):
 @app.route('/next', methods=['POST', 'GET'])
 def next():
     if request.method == 'POST':
-        print(request.args['response'])
+        print(request.args["response"])
     global curr_question
     curr_question += 1
     return redirect('/questions/'+str(curr_question))
