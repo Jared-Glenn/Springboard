@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, flash
+from flask import Flask, render_template, redirect, request, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 import surveys
 
@@ -10,25 +10,23 @@ debug = DebugToolbarExtension(app)
 
 curr_question = -1
 num_questions = 0
-responses = []
 survey_dict = surveys.surveys
 
 @app.route('/')
 def survey_start():
     global num_questions
-    global responses
     num_questions = len(survey_dict["satisfaction"].questions)
-    responses = [None for x in range(num_questions)]
+    session["responses"] = [None for x in range(num_questions)]
     title = survey_dict["satisfaction"].title
     instructions = survey_dict['satisfaction'].instructions
     print(num_questions)
-    print(responses)
+    print(session["responses"])
     return render_template("survey_start.html", title=title, instructions=instructions)
 
 @app.route('/questions/<question>')
 def question(question):
     global curr_question
-    global responses
+    responses = session["responses"]
     if None in responses and int(question) > curr_question:
         question = responses.index(None)
         flash("Invalid Question: Please complete the questions in order")
@@ -38,13 +36,14 @@ def question(question):
     curr_question = int(question)
     question_obj = survey_dict['satisfaction'].questions[curr_question]
     print(responses)
+    session["responses"] = responses
     return render_template("question.html", index=curr_question, question=question_obj)
 
 
 @app.route('/next', methods=['POST', 'GET'])
 def next():
     global curr_question
-    global responses
+    responses = session["responses"]
     if request.method == 'POST':
         print(curr_question +  1)
         responses[curr_question] = request.form["response"]
@@ -52,7 +51,9 @@ def next():
     curr_question += 1
     if curr_question >= num_questions:
         curr_question = -1
+        session["responses"] = responses
         return redirect('/thank')
+    session["responses"] = responses
     return redirect('/questions/'+str(curr_question))
 
 @app.route('/back')
