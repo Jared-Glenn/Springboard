@@ -6,9 +6,8 @@
 
 <h2>{{title}}</h2>
 <p>{{question.question}}</p>
-<form action="/next" id="response" method="POST">
-    <label for="response-list">Choose a Response:</label>
-    <select name="response-list" id="response-list">
+<form action="/next" id="response-list" method="POST">
+    <select name="response" id="response">
         {%for option in question.choices%}
         <option value="{{option}}">{{option}}</option>
     {%endfor%}

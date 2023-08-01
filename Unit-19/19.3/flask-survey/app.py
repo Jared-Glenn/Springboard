@@ -4,6 +4,7 @@ import surveys
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "secrets"
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
 
@@ -28,12 +29,7 @@ def question(question):
 @app.route('/next', methods=['POST', 'GET'])
 def next():
     if request.method == 'POST':
-        print('GET REQUEST NOT LOGGED!!!!!!!!!!!!!!!!')
-        multi_dict = request.args
-        for key in multi_dict:
-            print(key)
-            print(multi_dict.get(key))
-            print(multi_dict.getlist(key))
+        print(request.args['response'])
     global curr_question
     curr_question += 1
     return redirect('/questions/'+str(curr_question))
