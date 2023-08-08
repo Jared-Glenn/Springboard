@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boggle</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <h1>Boggle Rocks a bit!</h1>
+
+    <table>
+    {% for row in board: %}
+        <tr>
+    {% for space in row: %}
+        <td class="space">{{ space }}</td>
+    {%endfor%}
+        </tr>
+    {%endfor%}
+    </table>
+
+    <form action="">
+        <label for="word-guess">Guess a Word:</label>
+        <input type="text">
+        <button>Guess!</button>
+    </form>
+
+    <script src="/static/scripts.js"></script>
+    
+</body>
+</html>
