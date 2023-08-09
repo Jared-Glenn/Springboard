@@ -19,12 +19,14 @@
     {%endfor%}
     </table>
 
-    <form action="">
+    <form action="" id="word-guess-form">
         <label for="word-guess">Guess a Word:</label>
-        <input type="text">
-        <button>Guess!</button>
+        <input type="text" name="word-guess" id="word-guess">
+        <button id="word-guess-button">Guess!</button>
     </form>
 
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="/static/scripts.js"></script>
     
 </body>

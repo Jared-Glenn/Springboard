@@ -68,3 +68,6 @@ def back():
 @app.route('/thank')
 def thank():
     return render_template('thank.html')
+
+if __name__ == '__main__':
+    app.run()
