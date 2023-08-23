@@ -16,6 +16,11 @@ def home():
     return render_template('home.html', board=session['board'])
 
 
+@app.route('/<guess>')
+def guess():
+    session['board'] = boggle_game.make_board()
+    return render_template('home.html', board=session['board'])
+
 
 if __name__ == '__main__':
     app.run(debug=True)
