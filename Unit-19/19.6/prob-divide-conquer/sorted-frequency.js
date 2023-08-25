@@ -2,4 +2,4 @@ function sortedFrequency() {
 
 }
 
-// module.exports = sortedFrequency
+module.exports = sortedFrequency
