@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session
+from flask import Flask, render_template, session, request
 from flask_debugtoolbar import DebugToolbarExtension
 from boggle import Boggle
 
@@ -16,10 +16,10 @@ def home():
     return render_template('home.html', board=session['board'])
 
 
-@app.route('/<guess>')
+@app.route('/guess')
 def guess():
-    session['board'] = boggle_game.make_board()
-    return render_template('home.html', board=session['board'])
+    word_guess = request.args["word_guess"]
+    return f"<h1>Searching for</h1>"
 
 
 if __name__ == '__main__':
