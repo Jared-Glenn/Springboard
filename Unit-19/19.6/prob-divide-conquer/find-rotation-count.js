@@ -4,7 +4,6 @@ function findRotationCount(arr) {
     let res = 0
 
     while (top >= bottom){
-        console.log(res)
         if (arr[bottom] < arr[top]) {
             if (arr[res] > arr[bottom]){
                 res = bottom;
@@ -19,7 +18,6 @@ function findRotationCount(arr) {
 
         // Bottom portion:
         if (arr[mid] >= arr[bottom]){
-            console.log(`bottom portion`)
             if (arr[mid] > arr[top]){
                 bottom = mid + 1;
             }
@@ -29,11 +27,9 @@ function findRotationCount(arr) {
         }
         // Top portion:
         else {
-            console.log(`top portion`)
             top = mid - 1;
         }
     }
-    console.log(`final res: ${res}`)
     return res;
 }
 
