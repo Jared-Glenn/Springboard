@@ -1,7 +1,7 @@
 function findRotatedIndex(arr, item) {
     let top = arr.length - 1;
     let bottom = 0;
-    for (let i = 0; i < 10; i++){
+    while (top >= bottom){
         let mid = Math.floor((top + bottom)/2);
         if (arr[mid] === item){
             return mid;
