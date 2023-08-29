@@ -18,8 +18,10 @@ def home():
 
 @app.route('/guess')
 def guess():
-    word_guess = request.args["word_guess"]
-    return f"<h1>Searching for</h1>"
+    word_guess = request.args.get("word_guess")
+    board = session['board']
+    result = boggle_game.check_valid_word(board, word_guess)
+    return result
 
 
 if __name__ == '__main__':
