@@ -9,6 +9,18 @@
 <body>
     <h1>Boggle!</h1>
 
+    <div>
+        <span class="timer"><strong>60</strong></span><span> seconds left!</span>
+    </div>
+
+    <br>
+
+    <div>
+        <span><strong>Score: </strong></span><span class="score">0</span>
+    </div>
+
+    <br>
+
     <table>
     {% for row in board: %}
         <tr>
@@ -19,9 +31,11 @@
     {%endfor%}
     </table>
 
+    <br>
+
     <form action="" id="word-guess-form">
         <label for="word-guess">Guess a Word:</label>
-        <input type="text" name="word-guess" id="word-guess">
+        <input type="text" name="word-guess" id="word-guess" placeholder="Word">
         <button id="word-guess-button">Guess!</button>
     </form>
 
@@ -42,6 +56,18 @@
         <ul class="not-word-list">
 
         </ul>
+    </div>
+
+    <br>
+
+    <div>
+        <span><strong>High Score: </strong></span><span class="high-score">{{high_score}}</span>
+    </div>
+
+    <br>
+
+    <div>
+        <span><strong>Number of Games: </strong></span><span class="games">{{games}}</span>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
