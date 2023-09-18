@@ -17,13 +17,31 @@ connect_db(app)
 app.app_context().push()
 db.create_all()
 
+
 @app.route('/')
 def home():
     """Main blog page. Shows list of all users on site."""
     
-    User.query.all
+    users = User.query.all()
     
-    return render_template("index.html")
+    return render_template("index.html", users=users)
+
+
+@app.route('/users')
+def users():
+    """Main blog page. Shows list of all users on site."""
+    
+    users = User.query.all()
+    
+    return render_template("index.html", users=users)
+
+
+@app.route('/users/new')
+def add_user():
+    """Form for adding new users."""
+    
+    return render_template("add_user.html")
+
 
 if __name__ == '__main__':
     app.run()
