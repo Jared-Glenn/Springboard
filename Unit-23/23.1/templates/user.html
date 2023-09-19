@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogly - {{user.first_name}} {{user.last_name}}</title>
+</head>
+<body>
+    
+    <img src="{{ user.image_url }}" alt="">
+    
+    <h1>{{user.first_name}} {{ user.last_name }}</h1>
+
+    <input id="edit-button" type="button" onclick="location.href='/users/{{ user.id }}/edit';" value="Edit">
+    <input id="delete-button" type="button" onclick="location.href='/users/{{ user.id }}/delete';" value="Delete">
+
+    
+</body>
+</html>
