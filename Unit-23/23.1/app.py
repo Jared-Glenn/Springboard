@@ -83,8 +83,6 @@ def edit_user(user_id):
 def apply_edit(user_id):
     """Edit an individual user."""
     
-    print("!!!!!!!!!!!!!!!!!HELLOOOOOOO!!!!!!!!!!!!!!!!!!!!!")
-    
     user_to_edit = User.query.get_or_404(user_id)
     
     user_to_edit.first_name = request.form["first-name"]
