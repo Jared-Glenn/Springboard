@@ -16,7 +16,7 @@ class BloglyTestCase(TestCase):
             html = res.get_data(as_text=True)
             
             self.assertEqual(res.status_code, 200)
-            self.assertIn('<h1>Create a User</h1>', html)
+            self.assertIn('<h1>Create a user</h1>', html)
     
     def test_user(self):
         with app.test_client() as client:
@@ -32,4 +32,20 @@ class BloglyTestCase(TestCase):
             html = res.get_data(as_text=True)
             
             self.assertEqual(res.status_code, 200)
-            self.assertIn('<h1>Edit a User</h1>', html)
+            self.assertIn('<h1>Edit a user</h1>', html)
+    
+    def test_post_form_page(self):
+        with app.test_client() as client:
+            res = client.get('/users/1/posts/new')
+            html = res.get_data(as_text=True)
+            
+            self.assertEqual(res.status_code, 200)
+            self.assertIn('<h1>Add Post for', html)
+    
+    def test_edit_post(self):
+        with app.test_client() as client:
+            res = client.get('/posts/1/edit')
+            html = res.get_data(as_text=True)
+            
+            self.assertEqual(res.status_code, 200)
+            self.assertIn('<h1>Edit a post</h1>', html)
