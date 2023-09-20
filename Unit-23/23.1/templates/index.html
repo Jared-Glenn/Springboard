@@ -15,5 +15,14 @@
         {% endfor %}
     </ul>
     <input type="button" onclick="location.href='/users/new';" value="Add User" id="new-user-button">
+
+    <h1>Posts</h1>
+
+    <ul>
+        {% for post in posts %}
+        <li><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
+        {% endfor %}
+    </ul>
+    <input type="button" onclick="location.href='/posts/new';" value="Add Post" id="new-post-button">
 </body>
 </html>

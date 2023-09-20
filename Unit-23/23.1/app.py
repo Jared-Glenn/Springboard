@@ -2,7 +2,7 @@
 
 from flask import Flask, request, redirect, render_template
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
+from models import db, connect_db, User, Post
 
 app = Flask(__name__)
 
@@ -23,8 +23,9 @@ def home():
     """Main blog page. Shows list of all users on site."""
     
     users = User.query.all()
+    posts = Post.query.all()
     
-    return render_template("index.html", users=users)
+    return render_template("index.html", users=users, posts=posts)
 
 
 @app.route('/users')
@@ -32,8 +33,12 @@ def users():
     """Main blog page. Shows list of all users on site."""
     
     users = User.query.all()
+    posts = Post.query.all()
     
-    return render_template("index.html", users=users)
+    return render_template("index.html", users=users, posts=posts)
+
+
+################## USERS #####################
 
 # New Users
 
@@ -60,13 +65,17 @@ def add_user():
 
 # User Info
 
-@app.route('/users/<user_id>')
-def user_page(user_id):
+@app.route('/users/<u_id>')
+def user_page(u_id):
     """Page template for each individual user."""
     
-    user = User.query.get(user_id)
+    user = User.query.get(u_id)
+    posts = Post.query.filter_by(user_id=u_id)
     
-    return render_template("user.html", user=user)
+    print('!!!!!!!!!!!!!!!!!!!!!!')
+    print(user)
+    
+    return render_template("user.html", user=user, posts=posts)
 
 # Edit User
 
@@ -105,6 +114,12 @@ def delete_page(user_id):
     db.session.commit()
     
     return redirect("/users")
+
+
+################## POSTS #####################
+
+# 
+
 
 
 if __name__ == '__main__':
