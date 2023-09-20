@@ -10,19 +10,23 @@
     
     <img src="{{ user.image_url }}" alt="">
     
-    <h1 id="username">{{user.first_name}} {{ user.last_name }}</h1>
+    <h1 class="username">{{user.first_name}} {{ user.last_name }}</h1>
 
     <input id="edit-button" type="button" onclick="location.href='/users/{{ user.id }}/edit';" value="Edit">
     <input id="delete-button" type="button" onclick="location.href='/users/{{ user.id }}/delete';" value="Delete">
 
-    <h2>Posts</h2>
+    <h2 class="username">Posts</h2>
 
-    <ul>
+    <ul class="user-posts-list">
+        {% if posts | length > 0 %}
         {% for post in posts %}
-        <li><a href="/users/{{ user.id }}">{{ user.first_name }} {{ user.last_name }}</a></li>
+        <li class="user-posts"><a href="/posts/{{ post.id }}">{{ post.title }}</a></li>
         {% endfor %}
+        {% else %}
+        <p class="user-posts">No posts yet!</p>
+        {% endif %}
     </ul>
-    <input type="button" onclick="location.href='/users/new';" value="Add User" id="new-user-button">
+    <input type="button" onclick="location.href='/users/{{ user.id }}/posts/new';" value="Add Post" id="add-post-button">
 
 </body>
 </html>

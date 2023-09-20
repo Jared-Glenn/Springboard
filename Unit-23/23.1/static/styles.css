@@ -60,7 +60,7 @@ img {
 
 }
 
-#username {
+.username {
     margin-left: 11rem;
     font-size: 2rem;
 }
@@ -110,4 +110,23 @@ img {
     color: white;
     background-color: rgb(65, 189, 65);
     border-color: rgb(65, 189, 65);
+}
+
+.user-posts-list {
+    margin-left: 11rem;
+}
+
+#add-post-button {
+    margin-left: 11rem;
+    padding: 0.4rem 0.7rem;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    background-color: rgb(29, 107, 209);
+    border-color: rgb(29, 107, 209);
+}
+
+#post-content {
+    height: 4rem;
 }
