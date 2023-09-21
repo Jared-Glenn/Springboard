@@ -31,6 +31,7 @@ class User(db.Model):
         u = self
         return f"<User {u.id} {u.first_name} {u.last_name} {u.image_url}>"
 
+
 class Post(db.Model):
     """Post."""
     
@@ -45,10 +46,54 @@ class Post(db.Model):
                         nullable=False)
     created_at = db.Column(db.DateTime(timezone=True))
     user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.id'),
                         nullable=False)
+    tags = db.relationship('Tag',
+                           secondary='posts_tags',
+                           backref='posts')
     
     def __repr__(self):
         """Show info about the post."""
         
         p = self
-        return f"<Post {p.id} {p.title} {p.content} {p.created_at} {p.user_id}>"
+        return f"<Post {p.id} {p.title} {p.content} {p.created_at} {p.user_id} {p.tags}>"
+    
+
+class Tag(db.Model):
+    """Tag."""
+    
+    __tablename__ = 'tags'
+    
+    id = db.Column(db.Integer,
+                   primary_key=True,
+                   autoincrement=True)
+    name = db.Column(db.String(50),
+                     nullable=False,
+                     unique=True)
+    posts = db.relationship('Post',
+                            secondary='posts_tags',
+                            backref='tags')
+    
+    def __repr__(self):
+        """Show info about tags."""
+        
+        t = self
+        return f"<Tag {t.id} {t.name} {t.posts}>"
+    
+
+class PostTag(db.Model):
+    
+    __tablename__ = 'posts_tags'
+    
+    post_id = db.Column(db.Integer,
+                        db.ForeignKey('posts.id'),
+                        primary_key=True)
+    tag_id = db.Column(db.Integer,
+                       db.ForeignKey('tags.id'),
+                       primary_key=True)
+    
+    def __repr__(self):
+        """Show info from intersection table on posts and tags."""
+        
+        pt = self
+        return f"<Tag {pt.post_id} {pt.tag_id}>"

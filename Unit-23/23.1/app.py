@@ -2,7 +2,7 @@
 
 from flask import Flask, request, redirect, render_template
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag
 from datetime import datetime
 
 app = Flask(__name__)
@@ -25,8 +25,9 @@ def home():
     
     users = User.query.all()
     posts = Post.query.all()
+    tags = Tag.query.all()
     
-    return render_template("index.html", users=users, posts=posts)
+    return render_template("index.html", users=users, posts=posts, tags=tags)
 
 
 @app.route('/users')
@@ -177,6 +178,7 @@ def apply_post_edit(post_id):
     
     return redirect(f"/posts/{post_id}")
 
+
 # Delete Post
 
 @app.route('/posts/<post_id>/delete')
@@ -190,6 +192,57 @@ def delete_post(post_id):
     db.session.commit()
     
     return redirect(f"/users/{user.id}")
+
+
+################## POSTS #####################
+
+# List all tags.
+
+@app.route('/tags')
+def tags_list():
+    """List all tags."""
+    
+    tags = Tag.query.all()
+    
+    return render_template("tag_list.html", tags=tags)
+
+
+# Show tag info.
+
+@app.route('/tags/<tag_id>')
+def show_tag_detail(tag_id):
+    pass
+
+
+# Make a new tag.
+
+@app.route('/tags/new')
+def new_tag_form():
+    pass
+
+
+@app.route('/tags/new', methods=['POST'])
+def create_new_tag():
+    pass
+
+
+# Edit a tag.
+
+@app.route('/tags/<tag_id>/edit')
+def edit_tag_form(tag_id):
+    pass
+
+
+@app.route('/tags/<tag_id>/edit', methods=['POST'])
+def edit_tag(tag_id):
+    pass
+
+
+# Delete a tag.
+
+@app.route('/tags/<tag_id>/delete', methods=['POST'])
+def delete_tag(tag_id):
+    pass
 
 
 if __name__ == '__main__':
