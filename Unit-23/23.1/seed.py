@@ -27,10 +27,6 @@ future = Post(title="Back to the Future", content="Whoa! This is heavy, Doc!", u
 quote = Tag(name="Quote")
 brag = Tag(name="Brag")
 
-# # Add post-tags
-# hookie_tag = PostTag(post_id=1, tag_id=1)
-# im_amazing_tag = PostTag(post_id=2, tag_id=2)
-# future_tag = PostTag(post_id=3, tag_id=1)
 
 db.session.add(jared)
 db.session.add(beka)
@@ -44,9 +40,16 @@ db.session.add(future)
 db.session.add(quote)
 db.session.add(brag)
 
-# db.session.add(hookie_tag)
-# db.session.add(im_amazing_tag)
-# db.session.add(future_tag)
+db.session.commit()
+
+# Add post-tags
+hookie_tag = PostTag(post_id=1, tag_id=1)
+im_amazing_tag = PostTag(post_id=2, tag_id=2)
+future_tag = PostTag(post_id=3, tag_id=1)
+
+db.session.add(hookie_tag)
+db.session.add(im_amazing_tag)
+db.session.add(future_tag)
 
 # Commit
 

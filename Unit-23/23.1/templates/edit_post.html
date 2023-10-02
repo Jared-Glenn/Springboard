@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Edit a post</h1>
+    <p><a href="/">Home</a></p>
+
+    <h1>Edit the post</h1>
 
     <form action="/posts/{{ post.id }}/edit" method="POST" id="edit-post-form">
         <label for="post-title">Title</label>
@@ -18,6 +20,6 @@
     </form>
     <input id="cancel-button" type="button" onclick="location.href='/posts/{{ post.id }}';" value="Cancel">
     <button id="edit-post-button" class="change-table" form="edit-post-form">Save</button>
-
+asd
 </body>
 </html>
