@@ -89,6 +89,7 @@ class LinkedList {
     else if (this.length === 1){
       const lastItem = this.head;
       this.head = null;
+      this.tail = null;
       this.length--;
       return lastItem.val;
     }
@@ -113,7 +114,7 @@ class LinkedList {
       }
       curr = curr.next;
     }
-    return curr;
+    return curr.val;
   }
 
   /** setAt(idx, val): set val at idx to val */
@@ -128,35 +129,56 @@ class LinkedList {
       curr = curr.next;
     }
     curr.val = val;
-    return curr;
+    return curr.val;
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    
     let curr = this.head;
 
-    if (idx === 0 && this.length !== 0){
-      this.unshift(val);
+    if (idx === (this.length)){
+      this.push(val);
     }
 
     for (let i = 0; i < idx; i++) {
       if (curr === null){
-        return "Index not found.";
+        return null;
       }
       curr = curr.next;
     }
-    const nextNode = curr;
-    const prevNode = curr.prev;
 
-    const newNode = new Node(val);
-    newNode.next = nextNode;
-    newNode.prev = prevNode;
+    if (curr === null){
+      return null;
+    }
 
-    nextNode.prev = newNode;
-    prevNode.next = newNode;
+    if (curr.prev !== null){
+      const nextNode = curr;
+      const prevNode = curr.prev;
+      
+      const newNode = new Node(val);
+      newNode.next = nextNode;
+      newNode.prev = prevNode;
 
-    return newNode;
+      nextNode.prev = newNode;
+      prevNode.next = newNode;
+
+      this.length++;
+      return newNode.val;
+    }
+    else {
+      const nextNode = curr;
+
+      const newNode = new Node(val);
+      newNode.next = nextNode;
+
+      nextNode.prev = newNode;
+
+      this.length++;
+      return newNode.val;
+    }
+
   }
 
   /** removeAt(idx): return & remove item at idx, */
@@ -170,12 +192,10 @@ class LinkedList {
 
     for (let i = 0; i < idx; i++) {
       if (curr === null){
-        return "Index not found.";
+        return null;
       }
       curr = curr.next;
     }
-
-    // WORKING HERE
 
     if (curr.next !== null && curr.prev !== null){
       const prevNode = curr.prev;
@@ -183,20 +203,20 @@ class LinkedList {
 
       nextNode.prev = prevNode;
       prevNode.next = nextNode;
+      this.length--;
     }
     else if (curr.next !== null) {
-      
-    }
+      const nextNode = curr.next;
 
-    if (curr.prev === null){
-      const prevNode = null;
+      nextNode.prev = null;
+      this.length--;
     }
-    else {
-      
+    else if (curr.prev !== null) {
+      const prevNode = curr.prev;
+
+      prevNode.next = null;
+      this.length--;
     }
-    
-    
-    prevNode.next = nextNode;
 
     return curr.val;
   }
@@ -222,4 +242,4 @@ class LinkedList {
   }
 }
 
-module.exports = LinkedList;
+// module.exports = LinkedList;
