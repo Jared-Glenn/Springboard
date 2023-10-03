@@ -1,5 +1,3 @@
-const LinkedList = require("./linked-list");
-
 describe("push", function() {
   it("appends node and increments length", function() {
     let lst = new LinkedList();
