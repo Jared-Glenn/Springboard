@@ -5,7 +5,7 @@ const $chosenNumber = $(".chosen-number")
 
 const baseUrl = "http://numbersapi.com/";
 
-const numberFact = () => {
+const numberFact = async () => {
     let thisUrl;
     
     if ($.isNumeric($chosenNumber.val())) {
@@ -18,26 +18,16 @@ const numberFact = () => {
 
     $chosenNumber.val("");
     $triviaArea.empty();
-    let futurePromise = axios.get(thisUrl);
+    let fact1 = await $.getJSON(thisUrl);
+    let fact2 = await $.getJSON(thisUrl);
+    let fact3 = await $.getJSON(thisUrl);
+    let fact4 = await $.getJSON(thisUrl);
 
-    futurePromise
-    .then(data1 => {
-        addFact(data1.data.text);
-        return axios.get(thisUrl);
-    })
-    .then(data2 => {
-        addFact(data2.data.text);
-        return axios.get(thisUrl);
-    })
-    .then(data3 => {
-        addFact(data3.data.text);
-        return axios.get(thisUrl);
-    })
-    .then(data4 => {
-        addFact(data4.data.text);
-    })
-    .catch(err => console.log(err));
-
+    addFact(fact1["text"]);
+    addFact(fact2["text"]);
+    addFact(fact3["text"]);
+    addFact(fact4["text"]);
+    return;
 }
 
 const addFact = (data) => {
