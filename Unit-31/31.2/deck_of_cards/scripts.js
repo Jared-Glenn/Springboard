@@ -9,48 +9,73 @@ const $chosenNumber = $(".chosen-number");
 const newShuffleUrl = "https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1";
 const dealCardUrl = "https://deckofcardsapi.com/api/deck/"
 
-const newShuffle = async () => {
+const newShuffle = () => {
 
     $cardListArea.empty();
 
-    let deck = await $.getJSON(newShuffleUrl);
+    let futurePromise = axios.get(newShuffleUrl);
 
-    let deckId = deck["deck_id"];
-    console.log(deckId);
-    sessionStorage.setItem("deck_id", deckId)
+    futurePromise
+    .then(data => {
+        sessionStorage.setItem("deck_id", data.data.deck_id);
+        console.log(data.data.deck_id)})
 
-    return deckId;
 }
 
-const dealACard = async () => {
+const dealACard = () => {
 
     let deckId = sessionStorage.getItem("deck_id");
-    let card = await $.getJSON(`${dealCardUrl}${deckId}/draw/?count=1`);
+    let futurePromise = axios.get(`${dealCardUrl}${deckId}/draw/?count=1`);
 
-    let cardName = `${card["cards"][0]["value"]} OF ${card["cards"][0]["suit"]}`;
+    futurePromise
+    .then(data => {
+        let cardName = `${(data.data.cards)[0]["value"]} OF ${(data.data.cards)[0]["suit"]}`;
+        addCard(cardName);
+    })
 
-    addCard(cardName);
-    return
+    return;
 }
 
-const shuffleDealOne = async () => {
-    await newShuffle();
-    await dealACard();
-    return
-}
+const shuffleDealOne = () => {
 
-const shuffleDealTwo = async () => {
-    await newShuffle();
+    $cardListArea.empty();
     
-    let deckId = sessionStorage.getItem("deck_id");
-    let card = await $.getJSON(`${dealCardUrl}${deckId}/draw/?count=2`);
+    let futurePromise = axios.get(newShuffleUrl);
 
-    let cardName1 = `${card["cards"][0]["value"]} OF ${card["cards"][0]["suit"]}`;
-    let cardName2 = `${card["cards"][1]["value"]} OF ${card["cards"][1]["suit"]}`;
+    futurePromise
+    .then(data => {
+        sessionStorage.setItem("deck_id", data.data.deck_id);
+        console.log(data.data.deck_id)
+        return axios.get(`${dealCardUrl}${data.data.deck_id}/draw/?count=1`);
+    })
+    .then(data => {
+        let cardName = `${(data.data.cards)[0]["value"]} OF ${(data.data.cards)[0]["suit"]}`;
+        addCard(cardName);
+    })
 
-    addCard(cardName1);
-    addCard(cardName2);
-    return
+    return;
+}
+
+const shuffleDealTwo = () => {
+
+    $cardListArea.empty();
+    
+    let futurePromise = axios.get(newShuffleUrl);
+
+    futurePromise
+    .then(data => {
+        sessionStorage.setItem("deck_id", data.data.deck_id);
+        console.log(data.data.deck_id)
+        return axios.get(`${dealCardUrl}${data.data.deck_id}/draw/?count=2`);
+    })
+    .then(data => {
+        let cardName1 = `${(data.data.cards)[0]["value"]} OF ${(data.data.cards)[0]["suit"]}`;
+        let cardName2 = `${(data.data.cards)[1]["value"]} OF ${(data.data.cards)[1]["suit"]}`;
+        addCard(cardName1);
+        addCard(cardName2);
+    })
+
+    return;
 }
 
 
